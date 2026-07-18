@@ -1,11 +1,14 @@
+# 📂 LINKED_LIST
+
+```text
 LINKED_LIST/
 │
 ├── README.md
 │
 ├── Learn-1D-LinkedList/
-│   ├── 01_node_basics.py                    ⭐ Foundation
-│   ├── 02_basic_operations.py               ⭐ Traversal + Length + Search +
-│   │                                           Insert + Delete
+│   ├── 01_node_basics.py                    ⭐ About Node Class
+│   ├── 02_basic_operations.py               ⭐ LL Operations
+│   │                                           
 │   └── notes.md
 │
 ├── Learn-Doubly-LinkedList/
@@ -43,3 +46,4 @@ LINKED_LIST/
     ├── 03_flatten_linked_list.py
     ├── 04_clone_linked_list_with_random_pointer.py
     └── notes.md
+```
