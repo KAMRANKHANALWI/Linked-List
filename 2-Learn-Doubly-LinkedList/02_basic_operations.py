@@ -13,20 +13,25 @@ Operations Covered:
     4. Search
     5. Insert at Head
     6. Insert at Tail
-    7. Delete Head
-    8. Delete Tail
+    7. Insert at Position
+    8. Delete Head
+    9. Delete Tail
+    10. Delete at Position
 
 Golden Rule:
     Every insertion/deletion must update BOTH next and prev pointers.
 
 Time Complexity:
-    Traverse            O(n)
-    Length              O(n)
-    Search              O(n)
-    Insert Head         O(1)
-    Insert Tail         O(n)
-    Delete Head         O(1)
-    Delete Tail         O(n)
+    Forward Traversal       O(n)
+    Backward Traversal      O(n)
+    Length                  O(n)
+    Search                  O(n)
+    Insert Head             O(1)
+    Insert Tail             O(n)
+    Insert at Position      O(n)
+    Delete Head             O(1)
+    Delete Tail             O(n)
+    Delete at Position      O(n)
 ===============================================================================
 """
 
@@ -77,9 +82,11 @@ class DoublyLinkedList:
 
         temp = self.head
 
+        # Reach the last node
         while temp.next:
             temp = temp.next
 
+        # Traverse backwards
         while temp:
             print(temp.data, end=" <-> ")
             temp = temp.prev
@@ -153,6 +160,39 @@ class DoublyLinkedList:
         new_node.prev = temp
 
     # -------------------------------------------------------------------------
+    # Insert at Position (0-Based Indexing)
+    # -------------------------------------------------------------------------
+
+    def insert_at_position(self, position, value):
+
+        if position < 0 or position > self.length():
+            print("Invalid Position")
+            return
+
+        if position == 0:
+            self.insert_head(value)
+            return
+
+        if position == self.length():
+            self.insert_tail(value)
+            return
+
+        current = self.head
+
+        for _ in range(position - 1):
+            current = current.next
+
+        new_node = Node(value)
+
+        # Connect new node
+        new_node.prev = current
+        new_node.next = current.next
+
+        # Reconnect neighbours
+        current.next.prev = new_node
+        current.next = new_node
+
+    # -------------------------------------------------------------------------
     # Delete Head
     # -------------------------------------------------------------------------
 
@@ -186,6 +226,33 @@ class DoublyLinkedList:
 
         temp.prev.next = None
 
+    # -------------------------------------------------------------------------
+    # Delete at Position (0-Based Indexing)
+    # -------------------------------------------------------------------------
+
+    def delete_at_position(self, position):
+
+        if position < 0 or position >= self.length():
+            print("Invalid Position")
+            return
+
+        if position == 0:
+            self.delete_head()
+            return
+
+        if position == self.length() - 1:
+            self.delete_tail()
+            return
+
+        current = self.head
+
+        for _ in range(position):
+            current = current.next
+
+        # Reconnect neighbours
+        current.prev.next = current.next
+        current.next.prev = current.prev
+
 
 # =============================================================================
 # Driver Code
@@ -213,6 +280,11 @@ if __name__ == "__main__":
     print("Search 30 :", dll.search(30))
     print("Search 100:", dll.search(100))
 
+    dll.insert_at_position(2, 25)
+
+    print("\nAfter Insert 25 at Position 2")
+    dll.traverse_forward()
+
     dll.delete_head()
 
     print("\nAfter Delete Head")
@@ -221,4 +293,9 @@ if __name__ == "__main__":
     dll.delete_tail()
 
     print("\nAfter Delete Tail")
+    dll.traverse_forward()
+
+    dll.delete_at_position(1)
+
+    print("\nAfter Delete Position 1")
     dll.traverse_forward()

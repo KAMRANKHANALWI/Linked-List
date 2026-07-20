@@ -31,7 +31,7 @@ next_node.prev = current
 
 ## Traversal
 
-Forward
+### Forward
 
 ```python
 temp = head
@@ -40,9 +40,14 @@ while temp:
     temp = temp.next
 ```
 
-Backward
+### Backward
 
 ```python
+# Reach the last node first
+
+while temp.next:
+    temp = temp.next
+
 while temp:
     temp = temp.prev
 ```
@@ -51,27 +56,50 @@ while temp:
 
 ## Time Complexity
 
-| Operation | Time |
-|----------|------|
-| Forward Traversal | O(n) |
+| Operation          | Time |
+| ------------------ | ---- |
+| Forward Traversal  | O(n) |
 | Backward Traversal | O(n) |
-| Length | O(n) |
-| Search | O(n) |
-| Insert Head | O(1) |
-| Insert Tail | O(n) |
-| Delete Head | O(1) |
-| Delete Tail | O(n) |
+| Length             | O(n) |
+| Search             | O(n) |
+| Insert Head        | O(1) |
+| Insert Tail        | O(n) |
+| Insert at Position | O(n) |
+| Delete Head        | O(1) |
+| Delete Tail        | O(n) |
+| Delete at Position | O(n) |
 
 ---
 
 ## Singly vs Doubly
 
-| Singly | Doubly |
-|--------|---------|
-| data + next | data + prev + next |
-| Forward only | Forward & Backward |
-| Less memory | More memory |
-| Simpler | Easier insertion/deletion |
+| Singly       | Doubly                    |
+| ------------ | ------------------------- |
+| data + next  | data + prev + next        |
+| Forward only | Forward & Backward        |
+| Less memory  | More memory               |
+| Simpler      | Easier insertion/deletion |
+
+---
+
+## Pointer Patterns
+
+### Insert Between Two Nodes
+
+```python
+new_node.prev = left
+new_node.next = right
+
+left.next = new_node
+right.prev = new_node
+```
+
+### Delete a Node
+
+```python
+left.next = right
+right.prev = left
+```
 
 ---
 
@@ -79,7 +107,9 @@ while temp:
 
 A Doubly Linked List is just a Singly Linked List with one extra pointer (`prev`).
 
-The only thing to remember is:
+Remember:
 
-- During insertion, update both `next` and `prev`.
-- During deletion, reconnect both neighboring nodes.
+- Move forward using `next`.
+- Move backward using `prev`.
+- Every insertion updates **both** `next` and `prev`.
+- Every deletion reconnects **both** neighboring nodes.
