@@ -1,49 +1,72 @@
-# 📂 LINKED_LIST
-
-```text
 LINKED_LIST/
 │
 ├── README.md
 │
-├── Learn-1D-LinkedList/
-│   ├── 01_node_basics.py                    ⭐ About Node Class
-│   ├── 02_basic_operations.py               ⭐ LL Operations
-│   │                                           
+├── 1-Learn-1D-LinkedList/
+│   ├── 01_node_basics.py
+│   ├── 02_basic_operations.py
 │   └── notes.md
 │
-├── Learn-Doubly-LinkedList/
+├── 2-Learn-Doubly-LinkedList/
 │   ├── 01_doubly_linked_list_basics.py
 │   ├── 02_basic_operations.py
 │   └── notes.md
 │
-├── Medium-LinkedList/
-│   ├── 01_middle_of_linked_list.py
-│   ├── 02_reverse_linked_list_iterative.py
-│   ├── 03_reverse_linked_list_recursive.py
-│   ├── 04_detect_cycle.py
-│   ├── 05_starting_point_of_cycle.py
-│   ├── 06_length_of_cycle.py
-│   ├── 07_palindrome_linked_list.py
-│   ├── 08_odd_even_linked_list.py
-│   ├── 09_remove_nth_node_from_end.py
-│   ├── 10_delete_middle_node.py
-│   ├── 11_sort_linked_list.py
-│   ├── 12_sort_0s_1s_2s.py
-│   ├── 13_intersection_of_two_linked_lists.py
+├── 3-LinkedList-Problems/
+│
+│   # -------------------------------
+│   # Pointer Reversal
+│   # -------------------------------
+│   ├── 01_reverse_linked_list_iterative.py
+│   ├── 02_reverse_linked_list_recursive.py
+│
+│   # -------------------------------
+│   # Dummy Node Pattern
+│   # -------------------------------
+│   ├── 03_add_two_numbers.py
+│   ├── 04_merge_two_sorted_lists.py
+│
+│   # -------------------------------
+│   # Pointer Manipulation
+│   # -------------------------------
+│   ├── 05_odd_even_linked_list.py
+│   ├── 06_sort_0s_1s_2s.py
+│   ├── 07_remove_nth_node_from_end.py
+│
+│   # -------------------------------
+│   # Slow & Fast Pointer
+│   # -------------------------------
+│   ├── 08_middle_of_linked_list.py
+│   ├── 09_detect_cycle.py
+│   ├── 10_length_of_cycle.py
+│   ├── 11_starting_point_of_cycle.py
+│   ├── 12_delete_middle_node.py
+│
+│   # -------------------------------
+│   # Two Pointer Gap
+│   # -------------------------------
+│   ├── 13_palindrome_linked_list.py
+│
+│   # -------------------------------
+│   # Miscellaneous
+│   # -------------------------------
 │   ├── 14_add_one_to_number.py
-│   ├── 15_add_two_numbers.py
+│   ├── 15_intersection_of_two_linked_lists.py
+│   ├── 16_sort_linked_list.py
+│
 │   └── notes.md
 │
-├── Medium-Doubly-LinkedList/
-│   ├── 01_delete_all_occurrences.py
-│   ├── 02_find_pairs_with_given_sum.py
-│   ├── 03_remove_duplicates_sorted_dll.py
+├── 4-Doubly-LinkedList-Problems/
+│   ├── 01_reverse_dll.py
+│   ├── 02_delete_all_occurrences.py
+│   ├── 03_find_pairs_given_sum.py
+│   ├── 04_remove_duplicates_sorted_dll.py
 │   └── notes.md
 │
-└── Hard-LinkedList/
+└── 5-Hard-LinkedList/
     ├── 01_reverse_nodes_in_k_group.py
     ├── 02_rotate_linked_list.py
     ├── 03_flatten_linked_list.py
-    ├── 04_clone_linked_list_with_random_pointer.py
+    ├── 04_merge_k_sorted_lists.py
+    ├── 05_clone_linked_list_with_random_pointer.py
     └── notes.md
-```
