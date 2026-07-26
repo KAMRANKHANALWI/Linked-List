@@ -1,142 +1,63 @@
 """
 ===============================================================================
-                         MIDDLE OF LINKED LIST
+                        MIDDLE OF LINKED LIST
 ===============================================================================
 
 Problem Statement
 -----------------
 Given the head of a singly linked list, return the middle node.
 
-If there are two middle nodes (even length list), return the SECOND middle node.
+If the linked list has two middle nodes, return the SECOND middle node.
 
-Example 1:
-    Input:
-        1 -> 2 -> 3 -> 4 -> 5
+Example
 
-    Output:
-        3
+Input
 
+1 -> 2 -> 3 -> 4 -> 5
 
-Example 2:
-    Input:
-        1 -> 2 -> 3 -> 4 -> 5 -> 6
+Output
 
-    Output:
-        4
+3
 
+-------------------------------------------------------------------------------
+Pattern Learned ⭐⭐⭐
+-------------------------------------------------------------------------------
 
-===============================================================================
+Slow & Fast Pointer
+
+-------------------------------------------------------------------------------
 Intuition
-===============================================================================
+-------------------------------------------------------------------------------
 
-The first idea that comes to mind is:
+Approach 1 (Brute Force)
 
-    "Find the length first."
+Find the length of the linked list.
 
-Once we know the length, we can calculate the middle index.
+Middle Index = Length // 2
 
-For example
+Traverse again until the middle node.
 
-Length = 5
+---------------------------------------------------------
 
-Middle Index = 5 // 2 = 2
+Approach 2 (Optimal)
 
-Move two steps from head.
+Instead of counting nodes,
 
-Done.
+use two pointers.
 
-Works perfectly.
+• Slow moves one step.
+• Fast moves two steps.
 
-But...
+When Fast reaches the end,
 
-Can we do it in ONE traversal instead of TWO?
-
-YES.
-
-This is where the famous Slow & Fast Pointer technique comes in.
-
-===============================================================================
-Approach 1 : Brute Force (Two Traversals)
-===============================================================================
-
-Step 1:
-    Count the number of nodes.
-
-Step 2:
-    middle = length // 2
-
-Step 3:
-    Traverse again until middle index.
-
-Return that node.
-
-Time Complexity:
-    O(n) + O(n)
-    = O(n)
-
-Space Complexity:
-    O(1)
-
-===============================================================================
-Approach 2 : Optimal (Slow & Fast Pointer)
-===============================================================================
-
-Idea:
-
-Use two pointers.
-
-slow moves ONE step.
-
-fast moves TWO steps.
-
-Visualization
-
-Initial
-
-1 -> 2 -> 3 -> 4 -> 5
-
-S
-F
-
---------------------------------
-
-Move
-
-1 -> 2 -> 3 -> 4 -> 5
-
-     S
-        F
-
---------------------------------
-
-Move
-
-1 -> 2 -> 3 -> 4 -> 5
-
-          S
-                F
-
---------------------------------
-
-Fast reached the end.
-
-Slow is exactly at the middle.
-
-Why?
-
-Because fast moves twice as quickly.
-
-By the time fast covers the whole list,
-slow has covered exactly half.
-
-That's why slow lands in the middle.
+Slow automatically reaches the middle.
 
 ===============================================================================
 """
 
-# =============================================================================
+# ============================================================================
 # Node
-# =============================================================================
+# ============================================================================
 
 
 class Node:
@@ -146,9 +67,9 @@ class Node:
         self.next = None
 
 
-# =============================================================================
-# Linked List
-# =============================================================================
+# ============================================================================
+# Linked List (Helper Class)
+# ============================================================================
 
 
 class LinkedList:
@@ -156,13 +77,9 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    # -------------------------------------------------------------------------
-    # Insert at Tail
-    # -------------------------------------------------------------------------
+    def insert_tail(self, data):
 
-    def insert_tail(self, value):
-
-        new_node = Node(value)
+        new_node = Node(data)
 
         if self.head is None:
             self.head = new_node
@@ -175,29 +92,36 @@ class LinkedList:
 
         temp.next = new_node
 
-    # -------------------------------------------------------------------------
-    # Traverse
-    # -------------------------------------------------------------------------
-
     def traverse(self):
 
         temp = self.head
 
         while temp:
-            print(temp.data, end=" -> ")
+
+            print(temp.data, end=" -> " if temp.next else "")
             temp = temp.next
 
-        print("None")
+        print()
 
-    # -------------------------------------------------------------------------
+
+# ============================================================================
+# Solution
+# ============================================================================
+
+
+class Solution:
+
+    # ------------------------------------------------------------------------
     # Brute Force
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
 
-    def middle_brute(self):
+    def middle_brute(self, head):
+        """
+        Find the length first, then move to the middle node.
+        """
 
-        # Count total nodes
         length = 0
-        temp = self.head
+        temp = head
 
         while temp:
             length += 1
@@ -205,21 +129,25 @@ class LinkedList:
 
         middle = length // 2
 
-        temp = self.head
+        temp = head
 
         for _ in range(middle):
             temp = temp.next
 
         return temp
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
     # Optimal
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
 
-    def middle_optimal(self):
+    def middle_optimal(self, head):
+        """
+        Slow moves one step.
+        Fast moves two steps.
+        """
 
-        slow = self.head
-        fast = self.head
+        slow = head
+        fast = head
 
         while fast and fast.next:
 
@@ -229,28 +157,26 @@ class LinkedList:
         return slow
 
 
-# =============================================================================
+# ============================================================================
 # Driver Code
-# =============================================================================
+# ============================================================================
 
 if __name__ == "__main__":
 
     ll = LinkedList()
 
-    ll.insert_tail(1)
-    ll.insert_tail(2)
-    ll.insert_tail(3)
-    ll.insert_tail(4)
-    ll.insert_tail(5)
-    ll.insert_tail(6)
+    for value in [1, 2, 3, 4, 5, 6]:
+        ll.insert_tail(value)
 
-    print("Linked List:")
+    print("Linked List")
     ll.traverse()
 
-    middle = ll.middle_brute()
+    solution = Solution()
+
+    middle = solution.middle_brute(ll.head)
     print("\nMiddle (Brute Force):", middle.data)
 
-    middle = ll.middle_optimal()
+    middle = solution.middle_optimal(ll.head)
     print("Middle (Optimal):", middle.data)
 
 
@@ -258,75 +184,94 @@ if __name__ == "__main__":
 ===============================================================================
 Dry Run (Optimal)
 
+Input
+
 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
-S
-F
+Initially
 
---------------------------------
+Slow
+Fast
+
+↓
+
+1 -> 2 -> 3 -> 4 -> 5 -> 6
+
+---------------------------------------------------------
 
 Move
 
+      Slow
+            Fast
+
+↓
+
 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
-     S
-        F
-
---------------------------------
+---------------------------------------------------------
 
 Move
 
+            Slow
+                        Fast
+
+↓
+
 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
-          S
-                F
-
---------------------------------
+---------------------------------------------------------
 
 Move
 
+                  Slow
+
+↓
+
 1 -> 2 -> 3 -> 4 -> 5 -> 6
+                              Fast (None)
 
-               S
-                       F (None)
-
-Loop Stops.
+Loop Stops
 
 Answer = 4
 
 ===============================================================================
-Time Complexity
+
+Complexity
+===============================================================================
 
 Brute Force
 
-O(n) + O(n)
+Time  : O(n)
+Space : O(1)
+
+---------------------------------------------------------
 
 Optimal
 
-O(n)
+Time  : O(n)
+Space : O(1)
+
+Only one traversal is required.
 
 ===============================================================================
-Space Complexity
 
-Both
-
-O(1)
-
+Interview Takeaway
 ===============================================================================
-Takeaway:
 
-Whenever a Linked List problem asks:
+Pattern : Slow & Fast Pointer ⭐⭐⭐
 
-• middle node
-• cycle detection
-• palindrome
-• kth node from end
-• start of cycle
+Fast moves twice as fast as Slow.
 
-Think immediately about
+When Fast reaches the end,
 
-    Slow Pointer
-    Fast Pointer
+Slow automatically reaches the middle.
+
+This same pattern is reused in:
+
+• Detect Cycle
+• Length of Cycle
+• Starting Point of Cycle
+• Palindrome Linked List
 
 ===============================================================================
 """
