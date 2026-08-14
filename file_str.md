@@ -69,4 +69,5 @@ LINKED_LIST/
     ├── 03_flatten_linked_list.py
     ├── 04_merge_k_sorted_lists.py
     ├── 05_clone_linked_list_with_random_pointer.py
+    ├── 06_browser_history_design.py
     └── notes.md
